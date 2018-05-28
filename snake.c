@@ -45,6 +45,16 @@ pos* dequeue( )
     return oldfront->position;
 }
 
+// Queues a position at the back
+
+pos snake_index_to_coordinate( int index )
+{
+    int x = index % g_width;
+    int y = index / g_width;
+    return (pos) { x, y };
+}
+
+// Draw the fruit somewhere randomly on the board
 void snake_draw_fruit( )
 {
     attrset( COLOR_PAIR( 3 ) );

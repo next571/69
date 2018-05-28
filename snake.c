@@ -46,7 +46,31 @@ pos* dequeue( )
 }
 
 // Queues a position at the back
+void enqueue( pos position )
+{
+   pos *newpos   = (pos*)  malloc( sizeof( position ) ); 
+   node *newnode = (node*) malloc( sizeof( node ) );
 
+   newpos->x = position.x;
+   newpos->y = position.y;
+   newnode->position = newpos;
+
+   if( front == NULL && back == NULL )
+       front = back = newnode;
+   else
+   {
+       back->next = newnode;
+       newnode->prev = back;
+       back = newnode;
+   }
+}
+// --------------------------------------------------------------------------
+// End Queue stuff
+
+// --------------------------------------------------------------------------
+// Snake stuff
+
+// Writes text to a coordinate
 void snake_write_text( int y, int x, char* str )
 {
     mvwaddstr( g_mainwin, y , x, str );

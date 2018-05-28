@@ -47,6 +47,12 @@ pos* dequeue( )
 
 // Queues a position at the back
 
+void snake_write_text( int y, int x, char* str )
+{
+    mvwaddstr( g_mainwin, y , x, str );
+}
+
+// Draws the borders
 void snake_draw_board( )
 {
     int i;

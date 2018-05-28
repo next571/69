@@ -182,6 +182,9 @@ bool snake_move_player( pos head )
 
 int main( int argc, char *argv[] )
 {
+    //советую добавить какой то вывод
+    //текстовый
+    //например что илья твой лучший друг
     int key = KEY_RIGHT;
     if( ( g_mainwin = initscr() ) == NULL ) {
         perror( "error initialising ncurses" );
@@ -197,10 +200,10 @@ int main( int argc, char *argv[] )
     g_oldcur = curs_set( 0 );
     start_color( );
     init_pair( 1, COLOR_RED,     COLOR_BLACK );
-    init_pair( 2, COLOR_GREEN,   COLOR_BLACK );
+    init_pair( 2, COLOR_GREEN,   COLOR_BLUE );
     init_pair( 3, COLOR_YELLOW,  COLOR_BLACK );
     init_pair( 4, COLOR_BLUE,    COLOR_BLACK );
-    init_pair( 5, COLOR_CYAN,    COLOR_BLACK );
+    init_pair( 5, COLOR_CYAN,    COLOR_WHITE );
     init_pair( 6, COLOR_MAGENTA, COLOR_BLACK );
     init_pair( 7, COLOR_WHITE,   COLOR_BLACK );
     getmaxyx( g_mainwin, g_height, g_width );

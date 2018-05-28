@@ -47,6 +47,23 @@ pos* dequeue( )
 
 // Queues a position at the back
 
+void snake_draw_board( )
+{
+    int i;
+    for( i=0; i<g_height; i++ )
+    {
+        snake_write_text( i, 0,         "X" );
+        snake_write_text( i, g_width-1, "X" );
+    }
+    for( i=1; i<g_width-1; i++ )
+    {
+        snake_write_text( 0, i,          "X" );
+        snake_write_text( g_height-1, i, "X" );
+    }
+    snake_write_text( g_height+1, 2, "Score:" );
+}
+
+// Resets the terminal window and clears up the mem
 void snake_game_over( )
 {
     free( spaces );

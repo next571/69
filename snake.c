@@ -8,6 +8,84 @@
 #define DESIRED_WIDTH  70
 #define DESIRED_HEIGHT 25
 
+WINDOW * g_mainwin;
+int g_oldcur, g_score = 0, g_width, g_height;
+typedef struct {
+    int x;
+    int y;
+} pos;
+pos fruit;
+
+// 2D array of all spaces on the board.
+bool *spaces;
+
+// --------------------------------------------------------------------------
+// Queue stuff
+
+// Queue implemented as a doubly linked list
+struct s_node
+{
+    pos *position; // **TODO: make this a void pointer for generality.
+    struct s_node *prev;
+    struct s_node *next;
+} *front=NULL, *back=NULL;
+typedef struct s_node node;
+
+// Returns the position at the front w/o dequeing
+pos* peek( )
+{
+    return front == NULL ? NULL : front->position;
+}
+
+// Returns the position at the front and dequeues
+pos* dequeue( )
+{
+    node *oldfront = front;
+    front = front->next;
+    return oldfront->position;
+}
+
+ back = newnode;
+   }
+}
+
+bool snake_move_player( pos head )
+{
+    attrset( COLOR_PAIR( 1 ) ) ;
+    
+    // Check if we ran into ourself
+    int idx = snake_cooridinate_to_index( head );
+    if( spaces[idx] )
+        snake_game_over( );
+    spaces[idx] = true; // Mark the space as occupied
+    enqueue( head );
+    g_score += 10;
+    
+    // Check if we're eating the fruit
+    if( head.x == fruit.x && head.y == fruit.y )
+    {
+        snake_draw_fruit( );
+        g_score += 1000;
+    }
+    else
+    {
+        // Handle the tail
+        pos *tail = dequeue( );
+        spaces[snake_cooridinate_to_index( *tail )] = false;
+        snake_write_text( tail->y, tail->x, " " );
+    }
+    
+    // Draw the new head 
+    snake_write_text( head.y, head.x, "S" );
+    
+    // Update scoreboard
+    char buffer[25];
+    sprintf( buffer, "%d", g_score );
+    attrset( COLOR_PAIR( 2 ) );
+    snake_write_text( g_height+1, 9, buffer );
+
+}
+
 int main( int argc, char *argv[] )
 {
     int key = KEY_RIGHT;

@@ -46,7 +46,20 @@ pos* dequeue( )
 }
 
 // Queues a position at the back
+	
+bool snake_in_bounds( pos position )
+{
+    return position.y < g_height - 1 && position.y > 0 && position.x < g_width - 1 && position.x > 0;
+}
 
+// 2D matrix of possible positions implemented with a 1D array. This maps
+// the x,y coordinates to an index in the array.
+int snake_cooridinate_to_index( pos position )
+{
+    return g_width * position.y + position.x;
+}
+
+// Similarly this functions maps an index back to a position
 pos snake_index_to_coordinate( int index )
 {
     int x = index % g_width;

@@ -46,7 +46,21 @@ pos* dequeue( )
 }
 
 // Queues a position at the back
-	
+
+void snake_game_over( )
+{
+    free( spaces );
+    while( front )
+    {
+        node *n = front;
+        front = front->next;
+        free( n );
+    }
+    endwin();
+    exit(0);
+}
+
+// Is the current position in bounds?
 bool snake_in_bounds( pos position )
 {
     return position.y < g_height - 1 && position.y > 0 && position.x < g_width - 1 && position.x > 0;

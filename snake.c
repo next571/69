@@ -45,10 +45,20 @@ pos* dequeue( )
     return oldfront->position;
 }
 
- back = newnode;
-   }
+void snake_draw_fruit( )
+{
+    attrset( COLOR_PAIR( 3 ) );
+    int idx;
+    do
+    {
+        idx = rand( ) % ( g_width * g_height );
+        fruit = snake_index_to_coordinate( idx );
+    }
+    while( spaces[idx] || !snake_in_bounds( fruit ) );    
+    snake_write_text( fruit.y, fruit.x, "F" );
 }
 
+// Handles moving the snake for each iteration
 bool snake_move_player( pos head )
 {
     attrset( COLOR_PAIR( 1 ) ) ;
